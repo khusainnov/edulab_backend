@@ -1,0 +1,4 @@
+.idea
+./config/.env
+./config/config.yml
+Makefile

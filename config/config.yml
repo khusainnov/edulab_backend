@@ -1,0 +1,6 @@
+db:
+  username: "russo"
+  host: "localhost"
+  port: "5432"
+  dbname: "edulab"
+  sslmode: "disable"
