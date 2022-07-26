@@ -40,6 +40,8 @@ func (h *Handler) UserIdentity(handler http.Handler) http.Handler {
 			return
 		}
 
+		//w.Header().Set("userId", userId)
+
 		ctx := context.WithValue(r.Context(), "userId", userId)
 		handler.ServeHTTP(w, r.WithContext(ctx))
 	})

@@ -3,6 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/khusainnov/edulab/internal/entity/user"
@@ -80,4 +81,10 @@ func (h *Handler) SignIn(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		logrus.Errorf("Cannot encode token, due to error: %s", err.Error())
 	}
+
+	http.SetCookie(w, &http.Cookie{
+		Name:    "accessToken",
+		Value:   token,
+		Expires: time.Now().Add(time.Hour * 12),
+	})
 }

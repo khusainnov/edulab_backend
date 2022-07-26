@@ -23,7 +23,8 @@ type AuthService struct {
 
 type tokenClaims struct {
 	jwt.StandardClaims
-	UserId int `json:"user_id"`
+	UserId   int    `json:"user_id"`
+	Username string `json:"username"`
 }
 
 func NewAuthService(repos repository.Authorization) *AuthService {
@@ -49,7 +50,8 @@ func (as *AuthService) GenerateToken(login, password string) (string, error) {
 			ExpiresAt: time.Now().Add(tokenTTL).Unix(),
 			IssuedAt:  time.Now().Unix(),
 		},
-		UserId: u.Id,
+		UserId:   u.Id,
+		Username: u.Username,
 	})
 
 	return token.SignedString([]byte(signingKey))
